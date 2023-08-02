@@ -1,10 +1,10 @@
+package befunge;
 
-
-public class Position {
+public class Pointer {
     private int x;
     private int y;
 
-    public Position(int x, int y) {
+    public Pointer(int x, int y) {
         this.x = x;
         this.y = y;
     }
@@ -23,5 +23,9 @@ public class Position {
 
     public void setY(int y) {
         this.y = y;
+    }
+    public void moveTo(Direction move){
+        x+= move.getX();
+        y+= move.getY();
     }
 }

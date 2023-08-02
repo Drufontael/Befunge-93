@@ -1,10 +1,10 @@
+package befunge;
 
-
-public class Move {
+public class Direction {
     private int x;
     private int y;
-    private String command;
-    public Move(String command){
+    private char command;
+    public Direction(char command){
         setCommand(command);
 
     }
@@ -17,30 +17,26 @@ public class Move {
         return y;
     }
 
-    public String getCommand() {
+    public char getCommand() {
         return command;
     }
 
-    public void setCommand(String command) {
+    public void setCommand(char command) {
         this.command = command;
         switch (command) {
-            case ">" -> {
-                this.x = 0;
-                this.y = 1;
-            }
-            case "<" -> {
+            case '<' -> {
                 this.x = 0;
                 this.y = -1;
             }
-            case "^" -> {
+            case '^' -> {
                 this.x = -1;
                 this.y = 0;
             }
-            case "v" -> {
+            case 'v' -> {
                 this.x = 1;
                 this.y = 0;
             }
-            case "?" ->{
+            case '?' ->{
                 this.x=(int)(Math.random()*10)%2;
                 this.y=this.x==0?1:0;
                 if(Math.random()*10>4.9){
