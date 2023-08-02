@@ -51,8 +51,8 @@ Aqui está uma breve visão geral da sintaxe básica do Befunge-93:
 2. **Ponteiro**: O programa começa com o ponteiro apontando para a direção direita (>) por padrão, mas pode ser alterado durante a execução. O ponteiro pode ser movido pelas setas: > (direita), < (esquerda), ^ (cima) e v (baixo).
 3. **Instruções básicas**: Cada caractere é uma instrução, e elas são executadas sequencialmente a partir do ponto de entrada. Alguns exemplos de instruções básicas são:
     * 0-9 Empilhar o valor numérico no topo da pilha de dados.
-    * + Adicionar os dois valores do topo da pilha e empilhar o resultado.
-    * - Subtrair o valor no topo da pilha do próximo valor e empilhar o resultado.
+    * \+ Adicionar os dois valores do topo da pilha e empilhar o resultado.
+    * \- Subtrair o valor no topo da pilha do próximo valor e empilhar o resultado.
     * \* Multiplicar os dois valores do topo da pilha e empilhar o resultado.
     * / Dividir o valor no topo da pilha pelo próximo valor e empilhar o resultado.
     * % Calcular o módulo do valor no topo da pilha pelo próximo valor e empilhar o resultado.
@@ -64,3 +64,14 @@ Aqui está uma breve visão geral da sintaxe básica do Befunge-93:
 4. **Controle de fluxo**:
     * _ Obtem o primeiro valor da pilha, se for 0, move pra direita, caso contrario move para esquerda.
     * | Obtem o primeiro valor da pilha, se for 0, move para baixo, caso contrario move para cima.
+    * \# Pula a próxima célula de comando.
+    * @ Encerra o fluxo.
+5. **Saidas**:
+    * . Obtem o primeiro valor da pilha e mostra na tela como inteiro.
+    * , Obtem o primeiro valor da pilha e mostra na tela como um caracter ASCII.
+6. **Entradas**: // *Não implementado ainda*
+    * & Pede um número ao usuario e o registra no topo da pilha.
+    * ~ Pede um caracter ao usuario e o regitra como numero ASCII no topo da pilha.
+7. **Modificadores**:
+    * p Pega os valores x, y e v do topo da pilha e modifica a célula de comando (x,y) para o valor ASCII de v.
+    * g Pega os valores x e y do topo da pilha, e coloca o código ASCII da célula de comando (x,y).
