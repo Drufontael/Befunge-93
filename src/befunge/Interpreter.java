@@ -3,11 +3,11 @@ package befunge;
 import java.util.Stack;
 
 public class Interpreter {
-    private Screen screen;
-    private StringBuilder print = new StringBuilder();
+    private final Screen screen;
+    private final StringBuilder print = new StringBuilder();
     private Pointer pointer = new Pointer(0, 0);
     private Direction direction = new Direction('>');
-    private Stack<Integer> stack = new Stack<>();
+    private final Stack<Integer> stack = new Stack<>();
 
     public Interpreter(Screen screen) {
         this.screen = screen;
@@ -26,7 +26,7 @@ public class Interpreter {
         int a, b, x, y, v;
         while (pointer != null) {
             char command = screen.command(pointer);
-            if (command >= 0 && command <= 9) stack.push((int) command - 48);
+            if (command>='0' && command <= '9') stack.push((int) command - 48);
             else {
                 switch (command) {
                     case '<' -> direction = new Direction('<');
@@ -34,9 +34,7 @@ public class Interpreter {
                     case '^' -> direction = new Direction('^');
                     case 'v' -> direction = new Direction('v');
                     case '?' -> direction = new Direction('?');
-                    case '#' -> {
-                        pointer.moveTo(direction);
-                    }
+                    case '#' -> pointer.moveTo(direction);
                     case '_' -> {
                         if (stack.pop() == 0) direction = new Direction('>');
                         else direction = new Direction('<');

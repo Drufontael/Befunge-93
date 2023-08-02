@@ -1,7 +1,7 @@
 package befunge;
 
 public class Screen {
-    private char[][] screen=new char[25][80];
+    private final char[][] screen=new char[25][80];
     private String commandString;
 
 
@@ -9,7 +9,10 @@ public class Screen {
     }
 
     public Screen(String commandString) {
+
         this.commandString = commandString;
+        setScreen();
+
     }
 
     public char[][] getScreen() {
@@ -19,13 +22,11 @@ public class Screen {
     public String getCommandString() {
         return commandString;
     }
-    protected void reader(){
+    protected void setScreen(){
         String[] lines=commandString.split("\n");
         for(int i=0;i<lines.length;i++){
             char[] instructions=lines[i].toCharArray();
-            for(int j=0;j<instructions.length;j++){
-                screen[i][j]=instructions[j];
-            }
+            System.arraycopy(instructions, 0, screen[i], 0, instructions.length);
         }
     }
     public char command(Pointer pointer){
