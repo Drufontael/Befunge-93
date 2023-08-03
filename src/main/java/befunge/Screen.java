@@ -1,7 +1,5 @@
 package befunge;
 
-import java.util.Arrays;
-
 public class Screen {
     private final char[][] screen=new char[25][80];
     private String commandString;
