@@ -17,6 +17,7 @@ public class Program {
                 2 234567890123456789012345678901234567890123456789012345678901234567890123456789""";
         Screen test1=new Screen(sieve);
         Interpreter testUm=new Interpreter(test1);
+        test1.printScreen();
         System.out.println(testUm.getPrint());
     }
 }

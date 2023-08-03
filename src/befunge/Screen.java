@@ -1,5 +1,7 @@
 package befunge;
 
+import java.util.Arrays;
+
 public class Screen {
     private final char[][] screen=new char[25][80];
     private String commandString;
@@ -34,5 +36,14 @@ public class Screen {
     }
     public void modify(int x,int y,int v){
         screen[x][y]=(char) v;
+    }
+    public void printScreen(){
+        for (char[] line:screen){
+            for (char command:line){
+                if(command!=0) System.out.print(command);
+                else System.out.print(" ");
+            }
+            System.out.println();
+        }
     }
 }
