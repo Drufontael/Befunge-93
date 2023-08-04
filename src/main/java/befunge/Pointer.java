@@ -9,7 +9,7 @@ public class Pointer {
     public Pointer(int x, int y) {
         this.x = x;
         this.y = y;
-        if(x<0||x>25||y<0||y>80) throw new BefungeException("Pointer outside  screen boundaries!");
+        if(x<0||x>=25||y<0||y>=80) throw new BefungeException("Pointer outside  screen boundaries!");
     }
 
     public int getX() {
@@ -23,6 +23,6 @@ public class Pointer {
     public void moveTo(Direction move){
         x+= move.getX();
         y+= move.getY();
-        if(x<0||x>25||y<0||y>80) throw new BefungeException("Pointer outside  screen boundaries!");
+        if(x<0||x>=25||y<0||y>=80) throw new BefungeException("Pointer outside  screen boundaries!");
     }
 }
