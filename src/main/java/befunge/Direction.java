@@ -6,7 +6,6 @@ public class Direction {
     private char command;
     public Direction(char command){
         setCommand(command);
-
     }
 
     public int getX() {

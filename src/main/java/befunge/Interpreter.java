@@ -1,12 +1,14 @@
 package befunge;
 
+import exceptions.BefungeException;
+
 import java.util.Stack;
 
 public class Interpreter {
     private final Screen screen;
     private final StringBuilder print = new StringBuilder();
     private Pointer pointer = new Pointer(0, 0);
-    private Direction direction = new Direction('>');
+    private final Direction direction = new Direction('>');
     private final Stack<Integer> stack = new Stack<>();
 
     public Interpreter(Screen screen) {
@@ -22,26 +24,26 @@ public class Interpreter {
         return stack;
     }
 
-    public void setPrint() {
+    private void setPrint() {
         int a, b, x, y, v;
         while (pointer != null) {
             char command = screen.command(pointer);
             if (command>='0' && command <= '9') stack.push((int) command - 48);
             else {
                 switch (command) {
-                    case '<' -> direction = new Direction('<');
-                    case '>' -> direction = new Direction('>');
-                    case '^' -> direction = new Direction('^');
-                    case 'v' -> direction = new Direction('v');
-                    case '?' -> direction = new Direction('?');
+                    case '<' -> direction.setCommand('<');
+                    case '>' -> direction.setCommand('>');
+                    case '^' -> direction.setCommand('^');
+                    case 'v' -> direction.setCommand('v');
+                    case '?' -> direction.setCommand('?');
                     case '#' -> pointer.moveTo(direction);
                     case '_' -> {
-                        if (stack.pop() == 0) direction = new Direction('>');
-                        else direction = new Direction('<');
+                        if (stack.pop() == 0) direction.setCommand('>');
+                        else direction.setCommand('<');
                     }
                     case '|' -> {
-                        if (stack.pop() == 0) direction = new Direction('v');
-                        else direction = new Direction('^');
+                        if (stack.pop() == 0) direction.setCommand('v');
+                        else direction.setCommand('^');
                     }
                     case '+' -> {
                         a = stack.pop();
@@ -110,7 +112,10 @@ public class Interpreter {
                             stack.push(b);
                         }
                     }
-                    case '$' -> stack.pop();
+                    case '$' -> {
+                        if(stack.isEmpty()) throw new BefungeException("Stack is empty, unable to execute '$'");
+                        stack.pop();
+                    }
                     case '.' -> {
                         Integer integer = stack.pop();
                         print.append(integer);
@@ -120,12 +125,14 @@ public class Interpreter {
                         print.append(character);
                     }
                     case 'p' -> {
+                        if(stack.size()<3) throw new BefungeException("Unable to execute 'p'");
                         x = stack.pop();
                         y = stack.pop();
                         v = stack.pop();
                         screen.modify(x, y, v);
                     }
                     case 'g' -> {
+                        if(stack.size()<2) throw new BefungeException("Unable to execute 'g'");
                         x = stack.pop();
                         y = stack.pop();
                         char vC = screen.command(new Pointer(x, y));
