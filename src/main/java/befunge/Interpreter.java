@@ -4,15 +4,13 @@ import exceptions.BefungeException;
 
 import java.util.Stack;
 
-public class Interpreter {
-    private final Screen screen;
+public class Interpreter extends Screen{
+
     private final StringBuilder print = new StringBuilder();
-    private Pointer pointer = new Pointer(0, 0);
-    private final Direction direction = new Direction('>');
     private final Stack<Integer> stack = new Stack<>();
 
-    public Interpreter(Screen screen) {
-        this.screen = screen;
+    public Interpreter(String commandScreen) {
+        super(commandScreen);
         setPrint();
     }
 
@@ -27,7 +25,7 @@ public class Interpreter {
     private void setPrint() {
         int a, b, x, y, v;
         while (pointer != null) {
-            char command = screen.command(pointer);
+            char command = super.command(pointer);
             if (command>='0' && command <= '9') stack.push((int) command - 48);
             else {
                 switch (command) {
@@ -129,19 +127,19 @@ public class Interpreter {
                         x = stack.pop();
                         y = stack.pop();
                         v = stack.pop();
-                        screen.modify(x, y, v);
+                        super.modify(x, y, v);
                     }
                     case 'g' -> {
                         if(stack.size()<2) throw new BefungeException("Unable to execute 'g'");
                         x = stack.pop();
                         y = stack.pop();
-                        char vC = screen.command(new Pointer(x, y));
+                        char vC = super.command(new Pointer(x, y));
                         stack.push((int) vC);
                     }
                     case '\"' -> {
                         do {
                             pointer.moveTo(direction);
-                            command = screen.command(pointer);
+                            command = super.command(pointer);
                             if (command != '\"') stack.push((int) command);
                         } while (command != '\"');
                     }

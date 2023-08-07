@@ -1,7 +1,6 @@
 package aplication;
 
 import befunge.Interpreter;
-import befunge.Screen;
 import exceptions.BefungeException;
 
 public class Program {
@@ -19,10 +18,10 @@ public class Program {
         String quebrada="$";
 
         try {
-            Screen test1 = new Screen(">g");
-            Interpreter testUm = new Interpreter(test1);
-            test1.printScreen();
-            System.err.println(testUm.getPrint());
+
+            Interpreter testUm = new Interpreter(sieve);
+            testUm.printScreen();
+            System.out.println(testUm.getPrint());
         }catch (BefungeException e){
             System.err.println("Execution failure: "+e.getMessage());
         }
